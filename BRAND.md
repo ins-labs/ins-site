@@ -2,8 +2,7 @@
 
 ## The mark
 The face-crescent: a female face in profile whose hair sweeps into a crescent.
-Vector-traced from the avatar Sherbo approved on 2026-10-15 ("هايل").
-Master source: /home/sandbox/brand/face-navy-path.txt (potrace trace, 1280 space).
+Traced from the approved avatar; master vector trace kept offline.
 
 ## Colorways
 - Primary (all external surfaces): lavender #e4dbf9 on navy #1e1b4a (sampled from the approved avatar)
