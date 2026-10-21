@@ -1,7 +1,16 @@
 #!/usr/bin/env bash
 # brand-audit.sh - brand audit for the public site and profile surfaces.
 # Prints PASS/FAIL lines with numbers. No secrets, no writes. Requires: curl, md5sum.
+# Check targets (profile handles, account IDs) live in ops/brand-audit.targets -
+# a local, uncommitted file. Copy ops/brand-audit.targets.example and fill it in.
 set -u
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+if [ -f "$SCRIPT_DIR/brand-audit.targets" ]; then
+  . "$SCRIPT_DIR/brand-audit.targets"
+else
+  echo "FAIL ops/brand-audit.targets missing (copy ops/brand-audit.targets.example and fill in real targets)"
+  exit 1
+fi
 SITE=https://ins.sherbeeny.com
 LOGO_MD5=866652fa1316e0b6dc8d96fd2a2ee4c7   # assets/brand/masters/logo.svg, verified 2026-10-21
 GH_USER_MD5=3ba1396ab420ff4ccb4e7198ddaea223   # unified-mark GitHub user avatar (460px), verified 2026-10-21
@@ -21,7 +30,7 @@ done
 code=$(curl -s -o /dev/null -w '%{http_code}' "$SITE/nonexistent-page")
 check "GET /404-page" 404 "$code"
 
-# Logo byte-identity with repo master
+# Logo + icon byte-identity
 m=$(curl -s "$SITE/logo.svg" | md5sum | awk '{print $1}')
 check "logo.svg md5" "$LOGO_MD5" "$m"
 m=$(curl -s "$SITE/favicon-32.png" | md5sum | awk '{print $1}')
@@ -36,22 +45,21 @@ right=$(printf '%s' "$html" | grep -o 'إنس' | wc -l)
 check "AR wrong-form count" 0 "$wrong"
 echo "INFO AR correct-form count: $right"
 
-# Favicon companion sanity (crescent+star, green/cream/gold)
+# Favicon companion palette
 fs=$(curl -s "$SITE/favicon.svg")
 printf '%s' "$fs" | grep -q '#0f4c3a' && echo "PASS favicon palette (green companion present)" || echo "FAIL favicon palette changed"
 
-# GitHub avatars (unified mark)
-gm=$(curl -s "https://avatars.githubusercontent.com/u/337566235?v=4&s=460" | md5sum | awk '{print $1}')
+# Profile avatars (targets from the uncommitted targets file)
+gm=$(curl -s "https://avatars.githubusercontent.com/u/${GH_USER_ID}?v=4&s=460" | md5sum | awk '{print $1}')
 check "GH user avatar md5" "$GH_USER_MD5" "$gm"
-gm=$(curl -s "https://avatars.githubusercontent.com/u/338397455?v=4&s=460" | md5sum | awk '{print $1}')
+gm=$(curl -s "https://avatars.githubusercontent.com/u/${GH_ORG_ID}?v=4&s=460" | md5sum | awk '{print $1}')
 check "GH org avatar md5" "$GH_ORG_MD5" "$gm"
 
-# Telegram public photos (og:image presence)
-for t in InsSherbeeny InsSherboBot; do
+for t in $TG_HANDLES; do
   u=$(curl -s "https://t.me/$t" | grep -o 'property="og:image" content="[^"]*"' | head -1 | sed 's/.*content="//;s/"//')
   if [ -n "$u" ]; then
-    echo "PASS t.me/$t og:image present (md5 $(curl -s "$u" | md5sum | awk '{print $1}'), baseline 2026-10-21: InsSherbeeny 8f5187f8bb545a9b52d64e8a2ed859da, InsSherboBot c2a0772cc3a9103ff3eb67805fb14a08)"
+    echo "PASS chat-profile og:image present (md5 $(curl -s "$u" | md5sum | awk '{print $1}'))"
   else
-    echo "FAIL t.me/$t og:image missing"
+    echo "FAIL chat-profile og:image missing"
   fi
 done
