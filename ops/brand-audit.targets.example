@@ -1,0 +1,4 @@
+# ops/brand-audit.targets.example - copy to ops/brand-audit.targets (uncommitted) and fill in.
+GH_USER_ID=000000000        # numeric GitHub user id for the profile avatar check
+GH_ORG_ID=000000000         # numeric GitHub org id for the org avatar check
+TG_HANDLES="handle1 handle2"  # public chat-profile handles to check for og:image
