@@ -1,0 +1,7 @@
+# Repo tech contract: ins-site (v1, agent:ammar, 2026-10-21)
+repo: ins-labs/ins-site
+visibility: "PUBLIC (Ins public site, CNAME + .nojekyll, GitHub Pages shape)"
+content: "static site: index.html/404.html/app.js, brand assets (assets/brand/masters SVGs), icons, BRAND.md, ops/ dir"
+runtime: "none - static hosting, no build step in the tree"
+rules: "public repo = public content only: no internal URLs, no agent/ops details; brand masters in assets/brand/masters are the source for derived assets (supersedes BRAND.md v2 line keeping masters out of this repo)"
+ci: "no workflows in the tree; public repo so hosted Actions are allowed if ever needed (11:56 rule covers private repos only)"
