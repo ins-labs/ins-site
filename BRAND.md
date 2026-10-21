@@ -4,7 +4,7 @@
 The face-crescent: a female face in profile whose hair sweeps into a crescent.
 Vector-traced from the avatar approved on 2026-10-15; the trace is the single
 source of truth for every render. Never redraw by hand; always derive from the
-master vector (kept in the brand workspace, not in this repo).
+master vector (master SVGs live in this repo under assets/brand/masters/).
 
 ## Colorways
 - Primary (all external surfaces): lavender #e4dbf9 on navy #1e1b4a
