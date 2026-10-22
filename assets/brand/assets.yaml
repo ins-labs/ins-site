@@ -1,0 +1,19 @@
+# assets.yaml - register of brand/identity assets in this repo. id + path only.
+assets:
+  logo: logo.svg
+  logo-master: assets/brand/masters/logo.svg
+  logo-face: logo-face.svg
+  mark-master: assets/brand/masters/mark-1280-base.svg
+  photo-mic-master: assets/brand/masters/photo-mic-v5-1280.svg
+  photo-glasses-master: assets/brand/masters/photo-glasses-v5-1280.svg
+  masters-readme: assets/brand/masters/README.md
+  favicon-svg: favicon.svg
+  favicon-16: favicon-16.png
+  favicon-32: favicon-32.png
+  favicon-ico: favicon.ico
+  apple-touch-icon: apple-touch-icon.png
+  icon-192: icon-192.png
+  icon-512: icon-512.png
+  avatar-square: avatar-square-1024.png
+  avatar-round: avatar-round-1024.png
+  manifest: manifest.json
