@@ -17,13 +17,16 @@ GH_USER_MD5=3ba1396ab420ff4ccb4e7198ddaea223   # unified-mark GitHub user avatar
 GH_ORG_MD5=3ba1396ab420ff4ccb4e7198ddaea223   # unified-mark GitHub org avatar (460px), verified 2026-10-21
 F32_MD5=89f78f841aa905520688010084edff16   # favicon-32.png, verified 2026-10-21
 ATI_MD5=a16d24ff377d46976c266c97226396c8   # apple-touch-icon.png, verified 2026-10-21
+ICO_MD5=af297e1fa778b7ea50f8abd438218b02   # favicon.ico (16/32/48), merged #22 2026-10-22
+F16_MD5=73f185663ddc7c3e9b4b176aed1c736b   # favicon-16.png, merged #22 2026-10-22
+MANIFEST_MD5=d3ae265711096f6c451234ac19c6f6b8   # manifest.json, merged #24 2026-10-22
 
 check() { # name expected actual
   if [ "$2" = "$3" ]; then echo "PASS $1 ($3)"; else echo "FAIL $1 (want $2, got $3)"; fi
 }
 
 # Site pages
-for p in / /favicon.svg /favicon-32.png /apple-touch-icon.png /logo.svg; do
+for p in / /favicon.svg /favicon-32.png /favicon-16.png /favicon.ico /apple-touch-icon.png /logo.svg /manifest.json; do
   code=$(curl -s -o /dev/null -w '%{http_code}' "$SITE$p")
   check "GET $p" 200 "$code"
 done
@@ -37,6 +40,12 @@ m=$(curl -s "$SITE/favicon-32.png" | md5sum | awk '{print $1}')
 check "favicon-32.png md5" "$F32_MD5" "$m"
 m=$(curl -s "$SITE/apple-touch-icon.png" | md5sum | awk '{print $1}')
 check "apple-touch-icon.png md5" "$ATI_MD5" "$m"
+m=$(curl -s "$SITE/favicon.ico" | md5sum | awk '{print $1}')
+check "favicon.ico md5" "$ICO_MD5" "$m"
+m=$(curl -s "$SITE/favicon-16.png" | md5sum | awk '{print $1}')
+check "favicon-16.png md5" "$F16_MD5" "$m"
+m=$(curl -s "$SITE/manifest.json" | md5sum | awk '{print $1}')
+check "manifest.json md5" "$MANIFEST_MD5" "$m"
 
 # Arabic feminine forms on the AR page
 html=$(curl -s "$SITE/")
@@ -44,6 +53,12 @@ wrong=$(printf '%s' "$html" | grep -o 'أنس' | wc -l)
 right=$(printf '%s' "$html" | grep -o 'إنس' | wc -l)
 check "AR wrong-form count" 0 "$wrong"
 echo "INFO AR correct-form count: $right"
+
+# Social-preview meta on the homepage
+og=$(printf '%s' "$html" | grep -c 'property="og:title"')
+check "og:title present" 1 "$og"
+tw=$(printf '%s' "$html" | grep -c 'name="twitter:card"')
+check "twitter:card present" 1 "$tw"
 
 # Favicon companion palette
 fs=$(curl -s "$SITE/favicon.svg")
