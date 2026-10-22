@@ -13,8 +13,8 @@ else
 fi
 SITE=https://ins.sherbeeny.com
 LOGO_MD5=866652fa1316e0b6dc8d96fd2a2ee4c7   # assets/brand/masters/logo.svg, verified 2026-10-21
-GH_USER_MD5=3ba1396ab420ff4ccb4e7198ddaea223   # unified-mark GitHub user avatar (460px), verified 2026-10-21
-GH_ORG_MD5=3ba1396ab420ff4ccb4e7198ddaea223   # unified-mark GitHub org avatar (460px), verified 2026-10-21
+GH_USER_MD5=${GH_USER_MD5:-e231b9bd70d2d82a6c820162a50737af}   # default: personal photo, intentional (2026-10-22); targets file may pin another
+GH_ORG_MD5=${GH_ORG_MD5:-3ba1396ab420ff4ccb4e7198ddaea223}   # unified-mark GitHub org avatar (460px), verified 2026-10-21; targets file may pin another
 F32_MD5=89f78f841aa905520688010084edff16   # favicon-32.png, verified 2026-10-21
 ATI_MD5=a16d24ff377d46976c266c97226396c8   # apple-touch-icon.png, verified 2026-10-21
 ICO_MD5=af297e1fa778b7ea50f8abd438218b02   # favicon.ico (16/32/48), merged #22 2026-10-22
