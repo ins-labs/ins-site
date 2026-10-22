@@ -8,8 +8,8 @@ Source-of-truth vector masters for the Ins public identity (site, avatars, group
 | --- | --- | --- | --- |
 | `logo.svg` | Site master mark (face-crescent, rounded rect) | 64x64 viewBox | Live - byte-identical to https://ins.sherbeeny.com/logo.svg |
 | `mark-1280-base.svg` | Full-bleed 1280 base for all photo variants: face path re-wrapped with `translate(640 640) scale(1.1) translate(-636 -638)`, navy #1e1b4a full-bleed | 1280x1280 | Stable base |
-| `photo-mic-v5-1280.svg` | Retired group photo variant (mic dot + strap curve) | 1280x1280 | DO NOT USE - rejected 2026-10-22: the mic reads wrong at the lips; kept for history only |
-| `photo-mic-v6-1280.svg` | Group photo variant: base + studio microphone (striped capsule, cradle, stem, base) in lavender #e4dbf9 beside the mouth, clear gap | 1280x1280 | Adopted by Ins under delegated authority 2026-10-22; Sherbo has not reviewed it. Chrome-render checks at 720px and 64px |
+| `photo-mic-v5-1280.svg` | Group photo variant: base + mic dot (cx521 cy662 r30) and up-curving mic line exiting the face edge to the right (stroke 14, round caps) | 1280x1280 | Live - restored 2026-10-22 |
+| `photo-mic-v6-1280.svg` | Studio-mic group photo variant (striped capsule, cradle, stem, base) | 1280x1280 | Rejected by Sherbo 2026-10-22; kept for history only. No new photo proposals without his go |
 | `photo-glasses-v5-1280.svg` | Group photo variant: base + glasses (rect x515 y408 w80 h58 rx16, arm to (716,493), bridge curve) in navy #1e1b4a stroke 13 | 1280x1280 | Candidate |
 
 ## Brand constants
