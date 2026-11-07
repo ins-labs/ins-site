@@ -1,3 +1,5 @@
+> **Before repository work:** read [NATIVE-PUSH-TO-DEPLOY.md](NATIVE-PUSH-TO-DEPLOY.md). Native Northflank qualification does not depend on Actions runners. This pointer does not alter the evidence or application-specific content below. Current slot route: native buildpacks triggered by intended branch pushes, not manual image selection.
+
 # Ins brand kit (v2, unified 2026-10-19)
 
 ## The mark
